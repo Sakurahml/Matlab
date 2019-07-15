@@ -1,14 +1,9 @@
-%PROJETO 3a UNIDADE PROCESSAMENTO DIGITAL DE SINAIS 
-%COMPONENTES 
-%JO√O GUILHERME 
-%WILLIAMS SOARES 
-
 clear
 %ENTRADA DAS IMAGENS 
 %IMAGENS "The ORL DATABASE of faces"
 profile on
 
-QTD = 10;        %N⁄MERO DE IMAGENS A SER ADICIONADO   
+QTD = 10;        %N√öMERO DE IMAGENS A SER ADICIONADO   
 QTD2 = 100;
 tresh(1:QTD2) = 22.02;
 
@@ -19,7 +14,7 @@ for i=1:QTD2
 end
 
  
-%MUDANDO O DOMÕNIO DAS IMAGENS - FFT 
+%MUDANDO O DOM√çNIO DAS IMAGENS - FFT 
 
 for i=1:QTD 
     x{i} =  fftshift(fft(im2double(im{i})));    
@@ -59,7 +54,7 @@ end
 
 P = (1/N*d) * S ;
 
-%IMPLEMENTA«√O DO FILTRO 
+%IMPLEMENTA√á√ÉO DO FILTRO 
 
 
 for i=1:d
@@ -81,20 +76,20 @@ h = temp * a * U;
 Hmace=reshape(h,d1,d2);
 save Hmace;
 
-%FAZENDO A CORRELA«√O DAS IMAGENS COM O FILTRO 
+%FAZENDO A CORRELA√á√ÉO DAS IMAGENS COM O FILTRO 
 load Hmace;
 for i= 1:QTD2
 
     o=fftshift(fft(im2double(im{i})));
     c{i}=ifftshift(ifft2(o .* Hmace));
     g{i} = c{i}.*conj(c{i});
-    %figure(i), mesh(g{i}) %plot das correlaÁıes das imagens
+    %figure(i), mesh(g{i}) %plot das correla√ß√µes das imagens
     
 end 
 
  figure(2), mesh(g{1}) 
  
-%COLETANDO AS M¡SCARAS PARA O C¡LCULO DO PSR E ENT√O DEFINI«√O DO RESULTADO
+%COLETANDO AS M√ÅSCARAS PARA O C√ÅLCULO DO PSR E ENT√ÉO DEFINI√á√ÉO DO RESULTADO
 j = 1;
 k = 1;
 soma = 0;
@@ -106,9 +101,9 @@ for i = 1:QTD2
         for x=35:54
                    if((((y>53)&&(y<59))&&((x<49)&&(x>43))))
                        vetor{i}{j} =  g{i}(y,x);  %MATRIZ INTERNA 5x5
-                       soma = soma + vetor{i}{j}; %GUARDANDO TODOS OS PONTOS DA M¡SCARA 5X5
+                       soma = soma + vetor{i}{j}; %GUARDANDO TODOS OS PONTOS DA M√ÅSCARA 5X5
                        soma5x5 = [soma5x5 soma];  %CONCATENANDO OS VALORES 
-                       soma = 0;                  %ZERANDO PARA SALVAR O PR”XIMO PONTO
+                       soma = 0;                  %ZERANDO PARA SALVAR O PR√ìXIMO PONTO
                        j = j+1;
                    else 
                        vetor1{i}{k} = g{i}(y,x);  %MATRIZ EXTERNA 20x20 - 5x5
@@ -143,14 +138,14 @@ for i = 1:QTD2
     end
 end
 
-%CALCULANDO A M…DIA DO PLANO 20X20
+%CALCULANDO A M√âDIA DO PLANO 20X20
 for i = 1:QTD2 
        
     media(i) = mean(INDI20(i,:)); 
         
 end
 
-%CALCULANDO O DESVIO PADR√O DO PLANO 20X20
+%CALCULANDO O DESVIO PADR√ÉO DO PLANO 20X20
 for i = 1:QTD2 
        
     desvp(i) = std(INDI20(i,:)); 
@@ -171,7 +166,7 @@ for i = 1:QTD2
         
 end
 
-%SOMANDO O N⁄MERO DE IMAGENS QUE DERAM RESULTADO POSITIVO NAS IMAGENS
+%SOMANDO O N√öMERO DE IMAGENS QUE DERAM RESULTADO POSITIVO NAS IMAGENS
 %TREINADAS 
 val = 0;
 for i = 1:QTD
@@ -180,7 +175,7 @@ for i = 1:QTD
     end
 end
 
-%SOMANDO O N⁄MERO DE IMAGENS QUE DERAM RESULTADO POSITIVO NAS IMAGENS NO
+%SOMANDO O N√öMERO DE IMAGENS QUE DERAM RESULTADO POSITIVO NAS IMAGENS NO
 %TOTAL
 val1 = 0;
 for i = QTD+1:QTD2
